@@ -1,39 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointment Data</title>
-    <script src=""></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Information Form</title>
 </head>
 <body>
-    <h3>Appointment Data</h3>
-    <div>
-        <form onsubmit="MyFunction(event)">
-            <label for="">Name:</label>
-            <input type="text" id="name" required>
-            <label for="">Email:</label>
-            <input type="email" id="emailId" required>
-            <label for="">Mobile NO:</label>
-            <input type="tel" id="number" required>
-            <button>Submit</button>
-        </form>
-        <li id="lists"></li>    
-        <script src="https://jsonplaceholder.typicode.com/posts/1/comments"></script>  
-    </div>
-    <script>
-        // function MyFunction(event){
-        //     event.preventDefault();
-        //     const name = document.getElementById('name')
-        //     const email = document.getElementById('emailId')
-        //     const number = document.getElementById('number')
-        // }
-    
-        // const obj={
-        //     name:name,
-        //     email:email,
-        //     number:number
-        // }
-    </script>
+<h1>User Information</h1>
+<form id="userForm">
+  <label for="username">Username:</label>
+  <input type="text" id="username" required><br>
+  
+  <label for="email">Email:</label>
+  <input type="email" id="email" required><br>
+  
+  <label for="phone">Phone Number:</label>
+  <input type="tel" id="phone" pattern="[0-9]{10}" required><br>
+  
+  <button type="button" id="submitButton">Submit</button>
+</form>
+<script src="https://crudcrud.com/api/b18756834e14416ebba7cb4e163b5828"></script>
+<script>
+  const userForm = document.getElementById('userForm');
+  const usernameInput = document.getElementById('username');
+  const emailInput = document.getElementById('email');
+  const phoneInput = document.getElementById('phone');
+  const submitButton = document.getElementById('submitButton');
+
+  submitButton.addEventListener('click', submitUser);
+
+  function submitUser() {
+    const username = usernameInput.value;
+    const email = emailInput.value;
+    const phone = phoneInput.value;
+
+    if (username && email && phone) {
+      const userData = { username, email, phone };
+      saveUser(userData);
+      clearInputs();
+      alert('User information submitted successfully!');
+    } else {
+      alert('Please fill out all fields.');
+    }
+  }
+
+  function saveUser(userData) {
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    users.push(userData);
+    localStorage.setItem('users', JSON.stringify(users));
+    axios.get({
+
+    })
+  }
+
+  function clearInputs() {
+    usernameInput.value = '';
+    emailInput.value = '';
+    phoneInput.value = '';
+  }
+</script>
 </body>
 </html>
